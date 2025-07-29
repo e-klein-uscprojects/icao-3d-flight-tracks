@@ -1,71 +1,41 @@
-/* Global Styles */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f6f9;
-  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f3f7;
   padding: 20px;
   color: #333;
 }
 
-/* Heading */
 h1 {
   text-align: center;
   color: #0055a5;
-  margin-bottom: 10px;
 }
 
-/* Airport Selector */
-label {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-#airport-selector {
-  padding: 8px 12px;
+label, select {
   font-size: 16px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  margin: 0 10px 20px 0;
 }
 
-/* Altitude Chart */
 #altitude-chart {
   display: block;
   margin: 0 auto 20px auto;
   max-width: 600px;
   height: 300px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  border-radius: 8px;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-/* Map Container */
 #map {
   height: 600px;
   border-radius: 12px;
-  overflow: hidden;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-/* METAR Weather Marker Style */
-.weather-icon {
-  font-size: 14px;
-  color: #000;
-  white-space: nowrap;
-}
-
-/* Responsive tweaks */
 @media screen and (max-width: 768px) {
   #map {
     height: 400px;
   }
-
   #altitude-chart {
     height: 250px;
-    max-width: 100%;
-  }
-
-  h1 {
-    font-size: 1.5em;
   }
 }
