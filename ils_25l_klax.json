@@ -1,1 +1,0 @@
-{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"procedure": "ILS RWY 25L", "airport": "KLAX", "segment": "final approach"}, "geometry": {"type": "LineString", "coordinates": [[-118.42, 33.951], [-118.4085, 33.9416]]}}]}
