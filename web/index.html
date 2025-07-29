@@ -3,23 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <title>ICAO 3D Flight Tracks Viewer</title>
-
-  <!-- Mapbox GL JS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Your CSS -->
   <link rel="stylesheet" href="style.css" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
   <h1>🛫 ICAO 3D Flight Procedures Map</h1>
 
-  <!-- Airport Selector -->
   <label for="airport-selector">Choose an airport:</label>
   <select id="airport-selector">
     <option value="KLAX">Los Angeles (KLAX)</option>
@@ -27,13 +19,10 @@
     <option value="KDEN">Denver (KDEN)</option>
   </select>
 
-  <!-- Altitude Chart -->
   <canvas id="altitude-chart" style="width: 100%; max-width: 600px; margin-top: 20px;"></canvas>
-
-  <!-- Map Container -->
   <div id="map" style="height: 600px; margin-top: 20px;"></div>
 
-  <!-- Your Main Script -->
   <script src="script.js"></script>
 </body>
 </html>
+
