@@ -13,4 +13,4 @@ The goal of this interface is not simply visualization. It is compliance, tracea
 
 The repo is scaffolded with folders dedicated to procedural ingestion, metadata parsing, and rendering through CesiumJS. If successful, I expect this model will be scalable to other regions and procedures, with potential applications in regulatory analysis and pilot briefings.
 
-Thank you for reviewing the materials. I welcome technical feedback and collaboration as the system evolves.
+Thank you for reviewing the materials. I welcome technical feedback and collaboration as the system evolves
