@@ -1,1 +1,4 @@
+git add web/.nojekyll
+git commit -m "Add .nojekyll to disable Jekyll"
+git push origin main
 
