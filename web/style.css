@@ -2,7 +2,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: black;
+  font-family: sans-serif;
+  color: white;
 }
+
 #map {
   position: absolute;
   top: 0;
@@ -10,3 +13,26 @@ body {
   width: 100%;
 }
 
+#legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.line {
+  display: inline-block;
+  width: 20px;
+  height: 4px;
+  margin-right: 8px;
+}
+
+.final {
+  background: #00ffff;
+}
+
+.missed {
+  background: #ff9900;
+}
