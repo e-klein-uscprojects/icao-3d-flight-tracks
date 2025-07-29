@@ -1,0 +1,17 @@
+{
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [-118.4108, 33.9425],
+        [-118.4080, 33.9500],
+        [-118.4050, 33.9575]
+      ]
+    },
+    "properties": {
+      "name": "ILS 25L LAX"
+    }
+  }]
+}
