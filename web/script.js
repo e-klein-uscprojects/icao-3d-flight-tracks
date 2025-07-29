@@ -3,10 +3,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZXRoYW5rbGVpbi1sb3NhbmdlbGVzIiwiYSI6ImNtZG54b
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/satellite-streets-v12',
-  center: [-104.6737, 39.8617], // Denver (KDEN)
+  center: [-104.6737, 39.8617], // Denver Intl (KDEN)
   zoom: 9,
-  pitch: 60,
-  bearing: -20,
+  pitch: 50,
+  bearing: -17,
   antialias: true
 });
 
@@ -40,3 +40,4 @@ map.on('load', () => {
     }
   });
 });
+
