@@ -1,30 +1,31 @@
-function drawTrack(data) {
-  const canvas = document.getElementById('flightCanvas');
-  const ctx = canvas.getContext('2d');
+mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/satellite-v9',
+  center: [-118.4080, 33.9500],
+  zoom: 12
+});
 
-  ctx.strokeStyle = '#00ffff';
-  ctx.lineWidth = 2;
+map.on('load', () => {
+  fetch('data/ils_25l_klax.json')
+    .then(res => res.json())
+    .then(data => {
+      map.addSource('ils-track', {
+        type: 'geojson',
+        data: data
+      });
 
-  data.track.forEach((point, index) => {
-    const x = (point.lon + 180) * 2.5;  // Longitude scaling
-    const y = canvas.height - (point.lat + 90) * 2.5;  // Latitude scaling
+      map.addLayer({
+        id: 'ils-line',
+        type: 'line',
+        source: 'ils-track',
+        layout: {},
+        paint: {
+          'line-color': '#00ffff',
+          'line-width': 4
+        }
+      });
+    });
+});
 
-    if (index === 0) {
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
-  });
-
-  ctx.stroke();
-}
-
-fetch('data/ils_25l_klax.json')
-  .then(res => res.json())
-  .then(drawTrack)
-  .catch(err => {
-    console.error("Failed to load flight data:", err);
-  });
