@@ -1,93 +1,42 @@
-mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';  // ← Replace with your token
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXRoYW5rbGVpbi1sb3NhbmdlbGVzIiwiYSI6ImNtZG54b2F5aDF1anAyaW9zdzBub2FsZTEifQ.mvGz0tEuU9cHMgmQ2XyhZw';
 
 const map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/light-v10',
-  center: [-118.4081, 33.9425],
-  zoom: 11,
+  style: 'mapbox://styles/mapbox/satellite-streets-v12',
+  center: [-104.6737, 39.8617], // Denver (KDEN)
+  zoom: 9,
   pitch: 60,
-  bearing: -20
+  bearing: -20,
+  antialias: true
 });
 
-let altitudeChart;
+map.on('load', () => {
+  map.addSource('flight-track', {
+    type: 'geojson',
+    data: 'data/vor_33r_kden.json'
+  });
 
-// Map airport to filename
-const fileMap = {
-  KLAX: "ils_25l_klax.json",
-  KSFO: "rnav_28l_ksfo.json",
-  KDEN: "vor_33r_kden.json"
-};
-
-document.getElementById("airport-selector").addEventListener("change", e => {
-  const airport = e.target.value;
-  loadProcedures(airport);
-});
-
-function loadProcedures(airport) {
-  fetch(`/data/${fileMap[airport]}`)
-    .then(res => res.json())
-    .then(data => {
-      removeLayer("arrival-layer");
-      removeLayer("departure-layer");
-      plotProcedure(data.arrival, "arrival-layer", "#007bff");
-      plotProcedure(data.departure, "departure-layer", "#ffa500");
-      drawAltitudeChart([...data.arrival, ...data.departure]);
-    });
-}
-
-function plotProcedure(points, layerId, color) {
-  const geojson = {
-    type: "Feature",
-    geometry: {
-      type: "LineString",
-      coordinates: points.map(p => [p.lon, p.lat])
-    }
-  };
-
-  map.addSource(layerId, { type: "geojson", data: geojson });
   map.addLayer({
-    id: layerId,
-    type: "line",
-    source: layerId,
-    paint: {
-      "line-color": color,
-      "line-width": 3
-    }
-  });
-}
-
-function removeLayer(id) {
-  if (map.getLayer(id)) map.removeLayer(id);
-  if (map.getSource(id)) map.removeSource(id);
-}
-
-function drawAltitudeChart(points) {
-  const altitudes = points.map(p => p.altitude);
-  const distances = points.map(p => p.distance);
-  if (altitudeChart) altitudeChart.destroy();
-
-  const ctx = document.getElementById("altitude-chart").getContext("2d");
-  altitudeChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: distances,
-      datasets: [{
-        label: "Altitude (ft)",
-        data: altitudes,
-        borderColor: "#007bff",
-        backgroundColor: "rgba(0,123,255,0.1)",
-        fill: true
-      }]
+    id: 'track-line',
+    type: 'line',
+    source: 'flight-track',
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
     },
-    options: {
-      responsive: true,
-      scales: {
-        x: { title: { display: true, text: "Distance (nm)" } },
-        y: { title: { display: true, text: "Altitude (ft)" } }
-      }
+    paint: {
+      'line-color': '#00ffff',
+      'line-width': 4
     }
   });
-}
 
-// Auto-load default
-loadProcedures("KLAX");
+  map.addLayer({
+    id: 'track-points',
+    type: 'circle',
+    source: 'flight-track',
+    paint: {
+      'circle-radius': 6,
+      'circle-color': '#ff00ff'
+    }
+  });
+});
