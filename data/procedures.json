@@ -1,0 +1,37 @@
+[
+  {
+    "airport": {
+      "icao": "KLAX",
+      "name": "Los Angeles International",
+      "city": "Los Angeles",
+      "coordinates": [33.9416, -118.4085]
+    },
+    "procedure": {
+      "title": "ILS RWY 25L",
+      "effective_date": "27APR2021",
+      "design_criteria": "TERPS",
+      "julian_date": "21117",
+      "final_approach_course": 251,
+      "primary_navaid": "I-LAX",
+      "runway_length": 12091,
+      "tdze": 125,
+      "airport_elevation": 125,
+      "equipment_notes": ["DME required", "RADAR required"],
+      "pbn_notes": ["RNP APCH", "LPV capable"],
+      "missed_approach_track": {
+        "start": [33.9416, -118.4085],
+        "segments": [
+          [33.9510, -118.4200],
+          [33.9620, -118.4320]
+        ],
+        "heading": 260,
+        "type": "conventional"
+      },
+      "holding_pattern": {
+        "fix": [33.9620, -118.4320],
+        "radius_m": 3000,
+        "turn": "right"
+      }
+    }
+  }
+]
