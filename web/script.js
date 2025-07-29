@@ -1,65 +1,74 @@
-// Initialize Leaflet map
-const map = L.map('map').setView([33.9425, -118.4081], 12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data © OpenStreetMap'
-}).addTo(map);
+mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';  // ← Replace with your token
 
-// Chart.js import workaround for direct script
-let altitudeChart;
-
-// Airport selector logic
-const airportLocations = {
-  KLAX: { lat: 33.9425, lon: -118.4081 },
-  KSFO: { lat: 37.6188, lon: -122.375 },
-  KDEN: { lat: 39.8617, lon: -104.6731 }
-};
-
-document.getElementById("airport-selector").addEventListener("change", function () {
-  const airport = this.value;
-  const { lat, lon } = airportLocations[airport];
-  map.setView([lat, lon], 12);
-  loadProceduresFor(airport);
-  addWeatherOverlay(lat, lon);
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/light-v10',
+  center: [-118.4081, 33.9425],
+  zoom: 11,
+  pitch: 60,
+  bearing: -20
 });
 
-// Procedure loading and rendering
-function loadProceduresFor(airport) {
-  fetch(`data/${airport}.json`)
+let altitudeChart;
+
+// Map airport to filename
+const fileMap = {
+  KLAX: "ils_25l_klax.json",
+  KSFO: "rnav_28l_ksfo.json",
+  KDEN: "vor_33r_kden.json"
+};
+
+document.getElementById("airport-selector").addEventListener("change", e => {
+  const airport = e.target.value;
+  loadProcedures(airport);
+});
+
+function loadProcedures(airport) {
+  fetch(`/data/${fileMap[airport]}`)
     .then(res => res.json())
     .then(data => {
-      clearMapLayers();
-      plotArrival(data.arrival);
-      plotDeparture(data.departure);
+      removeLayer("arrival-layer");
+      removeLayer("departure-layer");
+      plotProcedure(data.arrival, "arrival-layer", "#007bff");
+      plotProcedure(data.departure, "departure-layer", "#ffa500");
       drawAltitudeChart([...data.arrival, ...data.departure]);
     });
 }
 
-function clearMapLayers() {
-  map.eachLayer(layer => {
-    if (layer.options && layer.options.pane === "overlayPane") map.removeLayer(layer);
+function plotProcedure(points, layerId, color) {
+  const geojson = {
+    type: "Feature",
+    geometry: {
+      type: "LineString",
+      coordinates: points.map(p => [p.lon, p.lat])
+    }
+  };
+
+  map.addSource(layerId, { type: "geojson", data: geojson });
+  map.addLayer({
+    id: layerId,
+    type: "line",
+    source: layerId,
+    paint: {
+      "line-color": color,
+      "line-width": 3
+    }
   });
 }
 
-function plotArrival(points) {
-  const coords = points.map(p => [p.lat, p.lon]);
-  const line = L.polyline(coords, { color: 'blue', weight: 3 }).addTo(map);
+function removeLayer(id) {
+  if (map.getLayer(id)) map.removeLayer(id);
+  if (map.getSource(id)) map.removeSource(id);
 }
 
-function plotDeparture(points) {
-  const coords = points.map(p => [p.lat, p.lon]);
-  const line = L.polyline(coords, { color: 'orange', weight: 3, dashArray: '4,6' }).addTo(map);
-}
-
-// Altitude chart generation
-function drawAltitudeChart(procedureData) {
-  const altitudes = procedureData.map(p => p.altitude);
-  const distances = procedureData.map(p => p.distance);
-
+function drawAltitudeChart(points) {
+  const altitudes = points.map(p => p.altitude);
+  const distances = points.map(p => p.distance);
   if (altitudeChart) altitudeChart.destroy();
 
-  const ctx = document.getElementById('altitude-chart').getContext('2d');
+  const ctx = document.getElementById("altitude-chart").getContext("2d");
   altitudeChart = new Chart(ctx, {
-    type: 'line',
+    type: "line",
     data: {
       labels: distances,
       datasets: [{
@@ -80,25 +89,5 @@ function drawAltitudeChart(procedureData) {
   });
 }
 
-// METAR overlay (demo using aviationweather.gov endpoint)
-async function addWeatherOverlay(lat, lon) {
-  try {
-    const response = await fetch(`https://aviationweather.gov/api/data/metar?coords=${lat},${lon}`);
-    const weatherData = await response.json();
-    const metar = weatherData[0]?.raw_text || "METAR data unavailable";
-
-    L.marker([lat, lon], {
-      title: "METAR",
-      icon: L.divIcon({
-        className: "weather-icon",
-        html: `<span style="background:#0cf;padding:4px;border-radius:6px">${metar}</span>`
-      })
-    }).addTo(map);
-  } catch (err) {
-    console.error("METAR fetch error:", err);
-  }
-}
-
-// Load default airport
-loadProceduresFor("KLAX");
-addWeatherOverlay(33.9425, -118.4081);
+// Auto-load default
+loadProcedures("KLAX");
