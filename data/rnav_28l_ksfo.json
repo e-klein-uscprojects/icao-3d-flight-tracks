@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"procedure": "RNAV RWY 28L", "airport": "KSFO", "segment": "final approach"}, "geometry": {"type": "LineString", "coordinates": [[-122.4, 37.62], [-122.38, 37.6]]}}]}
