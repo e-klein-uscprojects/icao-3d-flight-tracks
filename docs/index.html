@@ -2,19 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ICAO 3D Flight Tracks</title>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <title>ICAO 3D Flight Track Viewer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="map"></div>
-  <div id="legend">
-    <h3>Segment Legend</h3>
-    <p><span class="line final"></span> Final Approach</p>
-    <p><span class="line missed"></span> Missed Approach</p>
-  </div>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <h1>ILS 25L KLAX Flight Track</h1>
+  <canvas id="flightCanvas"></canvas>
+
   <script src="script.js"></script>
 </body>
 </html>
