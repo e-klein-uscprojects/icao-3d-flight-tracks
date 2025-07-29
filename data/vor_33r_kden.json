@@ -1,1 +1,37 @@
-{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"procedure": "VOR RWY 33R", "airport": "KDEN", "segment": "final approach"}, "geometry": {"type": "LineString", "coordinates": [[-104.74, 39.85], [-104.73, 39.84]]}}]}
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "procedure": "VOR RWY 33R",
+        "airport": "KDEN",
+        "segment": "final approach",
+        "altitude_min": "6500 ft"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-104.74, 39.85],
+          [-104.73, 39.84]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "procedure": "VOR RWY 33R",
+        "airport": "KDEN",
+        "segment": "missed approach",
+        "altitude_min": "7000 ft"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-104.73, 39.84],
+          [-104.71, 39.83]
+        ]
+      }
+    }
+  ]
+}
