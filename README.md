@@ -1,3 +1,5 @@
+*** I am currently finalizing a matter that remains underway, and I anticipate its completion by the end of this week.***
+
 # ICAO 3D Flight Tracks Visualization
 
 I am an aeronautical analyst with a background in aviation operations, procedural development, and spatial data strategy. This repository represents the first phase of a technical initiative I’ve long envisioned—namely, the interactive rendering of ICAO instrument procedures using structured metadata and geospatial analysis in three dimensions.
