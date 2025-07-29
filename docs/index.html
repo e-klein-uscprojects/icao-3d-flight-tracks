@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>3D ICAO Flight Track Viewer</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <title>ILS 25L - LAX</title>
+  <link href="style.css" rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>ILS Approach - RWY 25L KLAX</h1>
-  <canvas id="flightCanvas" width="1000" height="600"></canvas>
-
+  <h1>ILS 25L - LAX Flight Track</h1>
+  <div id="map"></div>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
