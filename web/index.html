@@ -4,17 +4,29 @@
   <meta charset="UTF-8" />
   <title>ICAO 3D Flight Tracks Viewer</title>
   <link rel="stylesheet" href="style.css" />
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
   <h1>🛫 ICAO Flight Procedures Map</h1>
-  <div id="map"></div>
 
+  <!-- ✨ Airport Selector -->
+  <label for="airport-selector">Choose an airport:</label>
+  <select id="airport-selector">
+    <option value="KLAX">Los Angeles (KLAX)</option>
+    <option value="KSFO">San Francisco (KSFO)</option>
+    <option value="KDEN">Denver (KDEN)</option>
+  </select>
+
+  <!-- 📈 Altitude Chart -->
+  <canvas id="altitude-chart" style="width: 100%; max-width: 600px; margin-top: 20px;"></canvas>
+
+  <!-- 🛫 Procedure Map -->
+  <div id="map" style="height: 600px; margin-top: 20px;"></div>
+
+  <!-- 🌐 External Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
