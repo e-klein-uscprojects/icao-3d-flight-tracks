@@ -1,21 +1,71 @@
+/* Global Styles */
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #111;
-  color: #eee;
+  padding: 20px;
+  color: #333;
 }
 
+/* Heading */
 h1 {
   text-align: center;
-  padding: 12px;
-  font-size: 24px;
-  color: #ffa500;
+  color: #0055a5;
+  margin-bottom: 10px;
 }
 
-#map {
-  height: 90vh;
-  margin: 0 12px;
-  border: 2px solid #333;
+/* Airport Selector */
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#airport-selector {
+  padding: 8px 12px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Altitude Chart */
+#altitude-chart {
+  display: block;
+  margin: 0 auto 20px auto;
+  max-width: 600px;
+  height: 300px;
+  border: 1px solid #ddd;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(255, 165, 0, 0.4);
+}
+
+/* Map Container */
+#map {
+  height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* METAR Weather Marker Style */
+.weather-icon {
+  font-size: 14px;
+  color: #000;
+  white-space: nowrap;
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 768px) {
+  #map {
+    height: 400px;
+  }
+
+  #altitude-chart {
+    height: 250px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
 }
