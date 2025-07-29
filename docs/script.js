@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXRoYW5rbGVpbi1sb3NhbmdlbGVzIiwiYSI6ImNtZG54b2F5aDF1anAyaW9zdzBub2FsZTEifQ.mvGz0tEuU9cHMgmQ2XyhZw';
 
 const map = new mapboxgl.Map({
   container: 'map',
@@ -9,7 +9,7 @@ const map = new mapboxgl.Map({
 
 map.on('load', () => {
   fetch('data/ils_25l_klax.json')
-    .then(res => res.json())
+    .then(response => response.json())
     .then(data => {
       map.addSource('ils-track', {
         type: 'geojson',
@@ -20,12 +20,17 @@ map.on('load', () => {
         id: 'ils-line',
         type: 'line',
         source: 'ils-track',
-        layout: {},
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round'
+        },
         paint: {
           'line-color': '#00ffff',
           'line-width': 4
         }
       });
-    });
+    })
+    .catch(error => console.error('Error loading GeoJSON:', error));
 });
+
 
