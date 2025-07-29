@@ -1,22 +1,9 @@
 {
-  "name": "ILS Approach 25L KLAX",
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [-118.407, 33.943], 
-          [-118.408, 33.940], 
-          [-118.409, 33.938],
-          [-118.410, 33.935]
-        ]
-      },
-      "properties": {
-        "altitudes": [3000, 2500, 2000, 1500],
-        "description": "ILS approach path to runway 25L at KLAX"
-      }
-    }
+  "track": [
+    { "lat": 33.950, "lon": -118.408 },
+    { "lat": 33.951, "lon": -118.407 },
+    { "lat": 33.952, "lon": -118.406 },
+    { "lat": 33.953, "lon": -118.405 }
   ]
 }
+
